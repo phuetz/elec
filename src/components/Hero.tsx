@@ -3,7 +3,7 @@ import { Hammer } from 'lucide-react';
 export default function Hero() {
   return (
     <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920')] bg-cover bg-center opacity-20"></div>
+      <div className="absolute inset-0 bg-[url('/images/20221217_154854.jpg')] bg-cover bg-center opacity-20"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div className="max-w-3xl">

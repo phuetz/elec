@@ -1,14 +1,86 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Renovation Company Website</title>
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+
+    <!-- SEO de base -->
+    <title>BELITEI - Électricien et Rénovation à Épinay-sur-Seine | Île-de-France</title>
+    <meta name="description" content="Électricien polyvalent à Épinay-sur-Seine. 25 ans d'expérience en rénovation, électricité, plomberie, VMC, carrelage, cuisine. Devis gratuit en Île-de-France.">
+    <meta name="keywords" content="électricien, Épinay-sur-Seine, Seine-Saint-Denis, 93, rénovation, plomberie, VMC, carrelage, cuisine, salle de bain, Paris, Île-de-France, devis gratuit, artisan">
+    <meta name="author" content="BELITEI">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://belitei.fr/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BELITEI - Électricien et Rénovation à Épinay-sur-Seine">
+    <meta property="og:description" content="Électricien polyvalent avec 25 ans d'expérience. Rénovation, électricité, plomberie, VMC, cuisine. Devis gratuit en Île-de-France.">
+    <meta property="og:url" content="https://belitei.fr/">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="BELITEI">
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
-</head>
+    <meta name="twitter:title" content="BELITEI - Électricien et Rénovation">
+    <meta name="twitter:description" content="Électricien polyvalent à Épinay-sur-Seine. Devis gratuit en Île-de-France.">
+
+    <!-- Données structurées Schema.org pour artisan local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "BELITEI",
+      "description": "Électricien polyvalent et rénovation tous corps d'état à Épinay-sur-Seine",
+      "url": "https://belitei.fr",
+      "telephone": "+33761615400",
+      "email": "delitei.georghii@orange.fr",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14 rue de Boussois, Bât. B, Esc. 4",
+        "addressLocality": "Épinay-sur-Seine",
+        "postalCode": "93800",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "48.9553",
+        "longitude": "2.3089"
+      },
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "48.8566",
+          "longitude": "2.3522"
+        },
+        "geoRadius": "50000"
+      },
+      "priceRange": "€€",
+      "openingHours": "Mo-Fr 08:00-18:00",
+      "sameAs": [],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Électricité"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Rénovation complète"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Plomberie"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "VMC et ventilation"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Carrelage"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cuisine et salle de bain"}}
+        ]
+      }
+    }
+    </script>
+
+    <!-- Thème et couleur -->
+    <meta name="theme-color" content="#f59e0b">
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

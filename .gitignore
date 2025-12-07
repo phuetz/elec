@@ -21,3 +21,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Zip files
+*.zip
+*.zip:Zone.Identifier

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 interface ContactFormData {
   name: string;
@@ -17,23 +17,43 @@ export default function Contact() {
     message: '',
     project_type: '',
   });
-  const [status, setStatus] = useState<'idle' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus('loading');
 
-    const mailtoLink = `mailto:delitei.georghii@orange.fr?subject=Demande de devis - ${formData.project_type}&body=Nom: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ATéléphone: ${formData.phone}%0D%0AType de projet: ${formData.project_type}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+    try {
+      const response = await fetch('https://formspree.io/f/xpwzgvkr', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          project_type: formData.project_type,
+          message: formData.message,
+          _subject: `Demande de devis - ${formData.project_type}`,
+        }),
+      });
 
-    window.location.href = mailtoLink;
-
-    setStatus('success');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-      project_type: '',
-    });
+      if (response.ok) {
+        setStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          project_type: '',
+        });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
 
     setTimeout(() => setStatus('idle'), 5000);
   };
@@ -66,27 +86,27 @@ export default function Contact() {
             </h3>
 
             <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
+              <a href="tel:+33761615400" className="flex items-start gap-4 group">
+                <div className="w-12 h-12 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-600 transition-colors">
                   <Phone className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-900 mb-1">Téléphone</h4>
-                  <p className="text-slate-600">07 61 61 54 00</p>
+                  <p className="text-slate-600 group-hover:text-amber-600 transition-colors">07 61 61 54 00</p>
                   <p className="text-slate-500 text-sm">Lun - Ven : 8h - 18h</p>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
+              <a href="mailto:delitei.georghii@orange.fr" className="flex items-start gap-4 group">
+                <div className="w-12 h-12 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-600 transition-colors">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-900 mb-1">Email</h4>
-                  <p className="text-slate-600">delitei.georghii@orange.fr</p>
+                  <p className="text-slate-600 group-hover:text-amber-600 transition-colors">delitei.georghii@orange.fr</p>
                   <p className="text-slate-500 text-sm">Réponse sous 24h</p>
                 </div>
-              </div>
+              </a>
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -95,7 +115,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold text-slate-900 mb-1">Adresse</h4>
                   <p className="text-slate-600">14 rue de Boussois, Bât. B, Esc. 4</p>
-                  <p className="text-slate-600">93800 Epinay-sur-Seine</p>
+                  <p className="text-slate-600">93800 Épinay-sur-Seine</p>
                 </div>
               </div>
             </div>
@@ -103,7 +123,7 @@ export default function Contact() {
             <div className="mt-10 bg-slate-50 rounded-xl p-6 border border-slate-200">
               <h4 className="font-semibold text-slate-900 mb-3">Zones d'intervention</h4>
               <p className="text-slate-600 leading-relaxed">
-                Intervention dans toute l'Île-de-France : Paris, Seine-Saint-Denis et départements limitrophes.
+                Intervention dans toute l'Île-de-France : Paris, Seine-Saint-Denis (93), Val-d'Oise (95), Hauts-de-Seine (92) et départements limitrophes.
               </p>
             </div>
           </div>
@@ -154,7 +174,7 @@ export default function Contact() {
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                  placeholder="+33 6 12 34 56 78"
+                  placeholder="06 12 34 56 78"
                 />
               </div>
 
@@ -171,12 +191,15 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
                 >
                   <option value="">Sélectionnez un type</option>
-                  <option value="electricite">Électricité</option>
-                  <option value="parquet">Pose de parquet</option>
-                  <option value="cuisine">Installation de cuisine</option>
-                  <option value="compteur">Changement de compteur</option>
-                  <option value="renovation-complete">Rénovation complète</option>
-                  <option value="autre">Autre</option>
+                  <option value="Électricité">Électricité</option>
+                  <option value="Rénovation complète">Rénovation complète</option>
+                  <option value="Salle de bain">Salle de bain</option>
+                  <option value="Cuisine">Cuisine</option>
+                  <option value="VMC / Ventilation">VMC / Ventilation</option>
+                  <option value="Plomberie">Plomberie</option>
+                  <option value="Carrelage">Carrelage</option>
+                  <option value="Extérieur / Pavés">Extérieur / Pavés</option>
+                  <option value="Autre">Autre</option>
                 </select>
               </div>
 
@@ -192,23 +215,45 @@ export default function Contact() {
                   onChange={handleChange}
                   rows={5}
                   className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all resize-none"
-                  placeholder="Décrivez votre projet..."
+                  placeholder="Décrivez votre projet, la surface, vos besoins..."
                 />
               </div>
 
               {status === 'success' && (
-                <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
-                  Votre client mail va s'ouvrir pour envoyer votre demande.
+                <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  Message envoyé avec succès ! Nous vous répondrons sous 24h.
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5" />
+                  Erreur lors de l'envoi. Veuillez appeler le 07 61 61 54 00.
                 </div>
               )}
 
               <button
                 type="submit"
-                className="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                disabled={status === 'loading'}
+                className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 text-slate-900 font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:scale-100 shadow-lg flex items-center justify-center gap-2"
               >
-                <Send className="w-5 h-5" />
-                Envoyer la demande
+                {status === 'loading' ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin"></div>
+                    Envoi en cours...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Envoyer la demande
+                  </>
+                )}
               </button>
+
+              <p className="text-sm text-slate-500 text-center">
+                Devis gratuit et sans engagement
+              </p>
             </form>
           </div>
         </div>
