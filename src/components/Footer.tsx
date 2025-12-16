@@ -8,7 +8,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Hammer className="w-8 h-8 text-amber-500" />
-              <span className="text-xl font-bold text-white">BELITEI</span>
+              <span className="text-xl font-bold text-white">E.S.C BELITEI</span>
             </div>
             <p className="text-slate-400 leading-relaxed">
               Votre partenaire de confiance pour tous vos travaux de rénovation d'appartements et de maisons.
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-500">
-          <p>&copy; {new Date().getFullYear()} BELITEI. Tous droits réservés.</p>
+          <p>&copy; {new Date().getFullYear()} E.S.C BELITEI. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

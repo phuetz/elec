@@ -25,3 +25,4 @@ dist-ssr
 # Zip files
 *.zip
 *.zip:Zone.Identifier
+.vercel

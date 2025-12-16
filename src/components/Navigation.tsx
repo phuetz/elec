@@ -10,7 +10,7 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
             <Hammer className="w-8 h-8 text-amber-500" />
-            <span className="text-xl font-bold">BELITEI</span>
+            <span className="text-xl font-bold">E.S.C BELITEI</span>
           </div>
 
           <div className="hidden md:block">

@@ -123,7 +123,7 @@ export default function Contact() {
             <div className="mt-10 bg-slate-50 rounded-xl p-6 border border-slate-200">
               <h4 className="font-semibold text-slate-900 mb-3">Zones d'intervention</h4>
               <p className="text-slate-600 leading-relaxed">
-                Intervention dans toute l'Île-de-France : Paris, Seine-Saint-Denis (93), Val-d'Oise (95), Hauts-de-Seine (92) et départements limitrophes.
+                Intervention dans toute l'Île-de-France : Paris, Seine-Saint-Denis (93), Val-d'Oise (95), Hauts-de-Seine (92), Seine-et-Marne (77), Essonne (91), Yvelines (78), Val-de-Marne (94) et l'Oise (60).
               </p>
             </div>
           </div>

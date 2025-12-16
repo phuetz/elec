@@ -10,7 +10,7 @@ export default function Hero() {
           <div className="flex items-center gap-3 mb-6">
             <Hammer className="w-12 h-12 text-amber-500" />
             <h1 className="text-4xl lg:text-6xl font-bold">
-              BELITEI
+              E.S.C BELITEI
             </h1>
           </div>
 
