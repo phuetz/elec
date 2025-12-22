@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carte Verso - E.S.C BELITEI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #0f172a;
+    }
+    .card {
+      width: 85mm;
+      height: 55mm;
+      border-radius: 3mm;
+      padding: 5mm;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -20mm;
+      right: -20mm;
+      width: 50mm;
+      height: 50mm;
+      background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3mm;
+      position: relative;
+      z-index: 1;
+    }
+    .logo-img {
+      width: 10mm;
+      height: 10mm;
+      border-radius: 2mm;
+      object-fit: cover;
+      border: 1px solid rgba(245,158,11,0.3);
+      margin-right: 5mm;
+    }
+    .company-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .company-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+    .tagline {
+      font-size: 8px;
+      font-weight: 500;
+      color: #f59e0b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .section-title {
+      font-size: 8px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2mm;
+      position: relative;
+      z-index: 1;
+    }
+    .services-grid {
+      display: table;
+      width: 100%;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .services-row {
+      display: table-row;
+    }
+    .services-col {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+      padding-right: 3mm;
+    }
+    .service {
+      font-size: 7.5px;
+      font-weight: 500;
+      color: #e2e8f0;
+      margin-bottom: 1.5mm;
+      padding-left: 3mm;
+      position: relative;
+    }
+    .service::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 1.5mm;
+      width: 1.2mm;
+      height: 1.2mm;
+      background: #f59e0b;
+      border-radius: 50%;
+    }
+    .contact-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.05);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5mm 5mm;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 1;
+    }
+    .contact-item {
+      font-size: 7px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 1mm;
+    }
+    .contact-item .icon {
+      color: #f59e0b;
+      font-size: 8px;
+    }
+    .website {
+      font-size: 7px;
+      color: #f59e0b;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 1mm;
+    }
+    .website .icon {
+      font-size: 8px;
+    }
+    @media print {
+      body { background: white; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <img src="/home/patrice/claude/elec/public/images/logo.jpeg" alt="Logo" class="logo-img" />
+      <div class="company-info">
+        <span class="company-name">E.S.C BELITEI</span>
+        <span class="tagline">Rénovation & Services</span>
+      </div>
+    </div>
+    <div class="section-title">Nos prestations</div>
+    <div class="services-grid">
+      <div class="services-row">
+        <div class="services-col">
+          <div class="service">Carrelage</div>
+          <div class="service">Parquet</div>
+          <div class="service">Peinture</div>
+          <div class="service">Cuisine</div>
+        </div>
+        <div class="services-col">
+          <div class="service">Salle de bain</div>
+          <div class="service">Plomberie</div>
+          <div class="service">Mezzanine</div>
+          <div class="service">Rénovation complète</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-bar">
+      <div class="contact-item">
+        <span class="icon">✉</span>
+        <span>delitei.georghii@orange.fr</span>
+      </div>
+      <div class="website"><span class="icon">🌐</span>esc-belitei.vercel.app</div>
+    </div>
+  </div>
+</body>
+</html>

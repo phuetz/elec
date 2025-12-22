@@ -1,5 +1,3 @@
-import { Hammer } from 'lucide-react';
-
 export default function Hero() {
   return (
     <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
@@ -7,8 +5,8 @@ export default function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div className="max-w-3xl">
-          <div className="flex items-center gap-3 mb-6">
-            <Hammer className="w-12 h-12 text-amber-500" />
+          <div className="flex items-center gap-4 mb-6">
+            <img src="/images/logo.jpeg" alt="E.S.C BELITEI" className="w-16 h-16 lg:w-20 lg:h-20 rounded-xl object-cover shadow-lg" />
             <h1 className="text-4xl lg:text-6xl font-bold">
               E.S.C BELITEI
             </h1>

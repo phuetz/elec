@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carte Recto - E.S.C BELITEI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #e2e8f0;
+    }
+    .card {
+      width: 85mm;
+      height: 55mm;
+      border-radius: 3mm;
+      padding: 5mm;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      margin-bottom: 2mm;
+    }
+    .logo-img {
+      width: 12mm;
+      height: 12mm;
+      border-radius: 2mm;
+      object-fit: cover;
+    }
+    .company-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .company-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e293b;
+      letter-spacing: 0.5px;
+    }
+    .tagline {
+      font-size: 9px;
+      font-weight: 600;
+      color: #f59e0b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.5mm;
+    }
+    .owner-name {
+      font-size: 10px;
+      font-weight: 500;
+      color: #64748b;
+      margin-top: 2mm;
+      margin-bottom: 2mm;
+    }
+    .services {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+    }
+    .service {
+      font-size: 7px;
+      font-weight: 500;
+      color: #1e293b;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 1mm 2mm;
+      border-radius: 1mm;
+      margin-right: 3mm;
+      margin-bottom: 2mm;
+    }
+    .website {
+      font-size: 7px;
+      color: #f59e0b;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 1mm;
+    }
+    .footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 2mm;
+    }
+    .phone {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 1.5mm;
+    }
+    .phone-icon {
+      color: #f59e0b;
+    }
+    .experience {
+      font-size: 7px;
+      color: #64748b;
+      text-align: right;
+    }
+    .experience strong {
+      color: #f59e0b;
+      font-weight: 700;
+    }
+    @media print {
+      body { background: white; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <img src="/home/patrice/claude/elec/public/images/logo.jpeg" alt="Logo" class="logo-img" />
+      <div class="company-info">
+        <span class="company-name">E.S.C BELITEI</span>
+        <span class="tagline">Électricité Générale</span>
+      </div>
+    </div>
+    <div class="owner-name">Gheorghii BELITEI</div>
+    <div class="services">
+      <span class="service">Courant fort & faible</span>
+      <span class="service">Portails automatiques</span>
+      <span class="service">Vidéophone</span>
+      <span class="service">Interphone</span>
+      <span class="service">Dépannage</span>
+      <span class="service">Installation</span>
+    </div>
+    <div class="footer">
+      <div class="phone">
+        <span class="phone-icon">📞</span>
+        <span>07 61 61 54 00</span>
+      </div>
+      <div class="website">
+        <span>🌐</span>
+        <span>esc-belitei.vercel.app</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

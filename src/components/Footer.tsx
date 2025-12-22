@@ -1,4 +1,4 @@
-import { Hammer, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -6,8 +6,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Hammer className="w-8 h-8 text-amber-500" />
+            <div className="flex items-center gap-3 mb-4">
+              <img src="/images/logo.jpeg" alt="E.S.C BELITEI" className="w-10 h-10 rounded-lg object-cover" />
               <span className="text-xl font-bold text-white">E.S.C BELITEI</span>
             </div>
             <p className="text-slate-400 leading-relaxed">

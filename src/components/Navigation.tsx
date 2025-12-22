@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Hammer, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,8 +8,8 @@ export default function Navigation() {
     <nav className="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <Hammer className="w-8 h-8 text-amber-500" />
+          <div className="flex items-center gap-3">
+            <img src="/images/logo.jpeg" alt="E.S.C BELITEI" className="w-10 h-10 rounded-lg object-cover" />
             <span className="text-xl font-bold">E.S.C BELITEI</span>
           </div>
 
