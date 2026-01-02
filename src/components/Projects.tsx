@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Calendar, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { projects } from '../data/projects';
+import BeforeAfterSlider from './BeforeAfterSlider';
 
 export default function Projects() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('fr-FR', {
@@ -14,11 +16,13 @@ export default function Projects() {
 
   const openLightbox = (index: number) => {
     setSelectedIndex(index);
+    setGalleryIndex(0);
     document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setSelectedIndex(null);
+    setGalleryIndex(0);
     document.body.style.overflow = 'auto';
   };
 
@@ -78,15 +82,25 @@ export default function Projects() {
               onClick={() => openLightbox(index)}
             >
               <div className="relative h-64 overflow-hidden">
-                <img
-                  src={project.image_url}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                  <ZoomIn className="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="absolute top-4 right-4 bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-sm font-semibold">
+                {project.before_image_url && project.after_image_url ? (
+                  <BeforeAfterSlider
+                    beforeImage={project.before_image_url}
+                    afterImage={project.after_image_url}
+                    className="w-full h-full"
+                  />
+                ) : (
+                  <>
+                    <img
+                      src={project.image_url}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                      <ZoomIn className="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  </>
+                )}
+                <div className="absolute top-4 right-4 bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-sm font-semibold z-20">
                   {project.category}
                 </div>
               </div>
@@ -161,11 +175,120 @@ export default function Projects() {
             className="max-w-6xl max-h-[90vh] mx-4 flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={selectedProject.image_url}
-              alt={selectedProject.title}
-              className="max-h-[70vh] max-w-full object-contain rounded-lg shadow-2xl"
-            />
+            {selectedProject.gallery && selectedProject.gallery.length > 0 ? (
+              <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4">
+                {/* Miniatures à gauche - 2 colonnes */}
+                <div className="hidden md:grid grid-cols-2 gap-2 overflow-y-auto max-h-[65vh] pr-2 scrollbar-thin">
+                  {selectedProject.gallery.map((item, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setGalleryIndex(idx);
+                      }}
+                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                        idx === galleryIndex
+                          ? 'border-amber-500 scale-105'
+                          : 'border-transparent opacity-50 hover:opacity-100'
+                      }`}
+                    >
+                      <img
+                        src={item.url}
+                        alt={item.label}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+                {/* Image principale */}
+                <div className="relative flex-1">
+                  <img
+                    src={selectedProject.gallery[galleryIndex].url}
+                    alt={selectedProject.gallery[galleryIndex].label}
+                    className="w-full h-[50vh] md:h-[65vh] object-contain rounded-lg"
+                  />
+                  {/* Label de l'image */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
+                    {selectedProject.gallery[galleryIndex].label}
+                  </div>
+                  {/* Compteur */}
+                  <div className="absolute top-4 right-4 bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-sm font-bold">
+                    {galleryIndex + 1} / {selectedProject.gallery.length}
+                  </div>
+                  {/* Flèches de navigation galerie */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setGalleryIndex(galleryIndex === 0 ? selectedProject.gallery!.length - 1 : galleryIndex - 1);
+                    }}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-amber-500 rounded-full text-white hover:text-slate-900 transition-all"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setGalleryIndex(galleryIndex === selectedProject.gallery!.length - 1 ? 0 : galleryIndex + 1);
+                    }}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-amber-500 rounded-full text-white hover:text-slate-900 transition-all"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </div>
+                {/* Miniatures en bas sur mobile */}
+                <div className="flex md:hidden gap-2 overflow-x-auto max-w-full px-2 py-2">
+                  {selectedProject.gallery.map((item, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setGalleryIndex(idx);
+                      }}
+                      className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
+                        idx === galleryIndex
+                          ? 'border-amber-500 scale-110'
+                          : 'border-transparent opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <img
+                        src={item.url}
+                        alt={item.label}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : selectedProject.before_image_url && selectedProject.after_image_url ? (
+              <div className="flex flex-col md:flex-row gap-4 w-full max-w-6xl">
+                <div className="flex-1 relative">
+                  <div className="absolute top-4 left-4 bg-slate-900/80 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
+                    Avant
+                  </div>
+                  <img
+                    src={selectedProject.before_image_url}
+                    alt="Avant"
+                    className="w-full h-[35vh] md:h-[60vh] object-cover rounded-lg shadow-2xl"
+                  />
+                </div>
+                <div className="flex-1 relative">
+                  <div className="absolute top-4 right-4 bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-sm font-semibold z-10">
+                    Après
+                  </div>
+                  <img
+                    src={selectedProject.after_image_url}
+                    alt="Après"
+                    className="w-full h-[35vh] md:h-[60vh] object-cover rounded-lg shadow-2xl"
+                  />
+                </div>
+              </div>
+            ) : (
+              <img
+                src={selectedProject.image_url}
+                alt={selectedProject.title}
+                className="max-h-[70vh] max-w-full object-contain rounded-lg shadow-2xl"
+              />
+            )}
 
             <div className="mt-6 text-center max-w-2xl">
               <div className="inline-block bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-sm font-semibold mb-3">

@@ -5,6 +5,11 @@ export interface Project {
   category: string;
   image_url: string;
   completed_date: string;
+  // Pour les projets avant/après
+  before_image_url?: string;
+  after_image_url?: string;
+  // Galerie de photos (étapes du chantier)
+  gallery?: { url: string; label: string }[];
 }
 
 export const projects: Project[] = [
@@ -146,5 +151,32 @@ export const projects: Project[] = [
     category: 'cuisine',
     image_url: '/images/20230202_170002.jpg',
     completed_date: '2023-02-02',
+  },
+
+  // RÉNOVATION SALLE DE BAIN - DÉCEMBRE 2025 (Avant/Après)
+  {
+    id: '16',
+    title: 'Rénovation salle de bain complète',
+    description: 'Installation VMC Aldes EasyHOME avec coffrage placo hydro, spots LED encastrés et finitions soignées.',
+    category: 'salle-de-bain',
+    image_url: '/images/20251219_090902.jpg',
+    completed_date: '2025-12-19',
+    before_image_url: '/images/20251215_150042.jpg',
+    after_image_url: '/images/20251219_090902.jpg',
+    gallery: [
+      { url: '/images/20251215_121609.jpg', label: 'Avant - Vue générale' },
+      { url: '/images/20251215_150042.jpg', label: 'VMC Aldes installée' },
+      { url: '/images/20251216_113314.jpg', label: 'Coffrage placo hydro' },
+      { url: '/images/20251216_113322.jpg', label: 'Trappe d\'accès VMC' },
+      { url: '/images/20251216_144410.jpg', label: 'Enduit en cours' },
+      { url: '/images/20251216_144418.jpg', label: 'Préparation peinture' },
+      { url: '/images/20251217_130633.jpg', label: 'Coffrage peint' },
+      { url: '/images/20251217_130639.jpg', label: 'Finitions plafond' },
+      { url: '/images/20251218_132435.jpg', label: 'Spots LED installés' },
+      { url: '/images/20251218_132441.jpg', label: 'Éclairage terminé' },
+      { url: '/images/20251218_132447.jpg', label: 'Vue avec meuble' },
+      { url: '/images/20251219_090856.jpg', label: 'Résultat final' },
+      { url: '/images/20251219_090902.jpg', label: 'Après - Vue complète' },
+    ],
   },
 ];
