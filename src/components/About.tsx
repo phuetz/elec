@@ -1,4 +1,12 @@
-import { Award, Briefcase, Languages, GraduationCap } from 'lucide-react';
+import { Award, Briefcase, Languages, GraduationCap, Heart, Shield, Eye, Users } from 'lucide-react';
+import { company } from '../data/company';
+
+const valueIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  'Qualité': Heart,
+  'Fiabilité': Shield,
+  'Transparence': Eye,
+  'Proximité': Users
+};
 
 export default function About() {
   return (
@@ -9,8 +17,54 @@ export default function About() {
             À propos
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Gheorghii BELITEI - Électricien polyvalent avec 25 ans d'expérience
+            {company.bio.subtitle}
           </p>
+        </div>
+
+        {/* Bio Section */}
+        <div className="mb-16">
+          <div className="bg-gradient-to-br from-amber-50 to-white rounded-2xl p-8 border border-amber-100">
+            <h3 className="text-2xl font-bold text-slate-900 mb-6">{company.bio.title}</h3>
+            <div className="prose prose-slate max-w-none">
+              {company.bio.content.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="text-slate-700 leading-relaxed mb-4">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            {/* Values */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+              {company.bio.values.map((value) => {
+                const Icon = valueIcons[value.title] || Heart;
+                return (
+                  <div key={value.title} className="bg-white rounded-lg p-4 border border-slate-200 text-center">
+                    <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <p className="font-semibold text-slate-900">{value.title}</p>
+                    <p className="text-xs text-slate-600 mt-1">{value.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 mt-8">
+              <div className="bg-slate-900 rounded-lg p-4 text-center">
+                <p className="text-2xl font-bold text-amber-500">{company.bio.stats.experience}</p>
+                <p className="text-sm text-slate-300">d'expérience</p>
+              </div>
+              <div className="bg-slate-900 rounded-lg p-4 text-center">
+                <p className="text-2xl font-bold text-amber-500">{company.bio.stats.projectsCompleted}</p>
+                <p className="text-sm text-slate-300">projets réalisés</p>
+              </div>
+              <div className="bg-slate-900 rounded-lg p-4 text-center">
+                <p className="text-2xl font-bold text-amber-500">{company.bio.stats.satisfactionRate}</p>
+                <p className="text-sm text-slate-300">satisfaction</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -23,31 +77,13 @@ export default function About() {
                 <h3 className="text-2xl font-bold text-slate-900">Expérience professionnelle</h3>
               </div>
               <div className="space-y-4 ml-15 pl-6 border-l-2 border-amber-500">
-                <div>
-                  <p className="font-semibold text-slate-900">2020 - 2025</p>
-                  <p className="text-slate-700">Travaux tous corps d'état dans le bâtiment</p>
-                  <p className="text-sm text-slate-600">Auto-entrepreneur - Entreprise BELITEI</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-slate-900">2018 - 2020</p>
-                  <p className="text-slate-700">Électricien qualifié</p>
-                  <p className="text-sm text-slate-600">Marly Service - Mareil Marly</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-slate-900">2016 - 2018</p>
-                  <p className="text-slate-700">Missions d'intérim électricité</p>
-                  <p className="text-sm text-slate-600">Divers chantiers</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-slate-900">2014 - 2016</p>
-                  <p className="text-slate-700">Électricien</p>
-                  <p className="text-sm text-slate-600">E.S.C. (Electricité Systèmes Communiquant) - Nanterre</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-slate-900">2000 - 2014</p>
-                  <p className="text-slate-700">Travaux tous corps d'état</p>
-                  <p className="text-sm text-slate-600">Entreprise Edouard - Champigny-sur-Marne</p>
-                </div>
+                {company.experience.map((exp, index) => (
+                  <div key={index}>
+                    <p className="font-semibold text-slate-900">{exp.period}</p>
+                    <p className="text-slate-700">{exp.title}</p>
+                    <p className="text-sm text-slate-600">{exp.company}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -59,16 +95,13 @@ export default function About() {
                 <h3 className="text-2xl font-bold text-slate-900">Formation</h3>
               </div>
               <div className="space-y-3 ml-15">
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                  <p className="font-semibold text-slate-900">2024</p>
-                  <p className="text-slate-700">Certification RGE</p>
-                  <p className="text-sm text-slate-600">Formation et obtention de la certification RGE (France)</p>
-                </div>
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                  <p className="font-semibold text-slate-900">1994</p>
-                  <p className="text-slate-700">Niveau Baccalauréat</p>
-                  <p className="text-sm text-slate-600">Moldavie</p>
-                </div>
+                {company.formations.map((formation, index) => (
+                  <div key={index} className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                    <p className="font-semibold text-slate-900">{formation.year}</p>
+                    <p className="text-slate-700">{formation.title}</p>
+                    <p className="text-sm text-slate-600">{formation.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -82,26 +115,14 @@ export default function About() {
                 <h3 className="text-2xl font-bold text-slate-900">Compétences</h3>
               </div>
               <div className="space-y-3">
-                <div className="bg-gradient-to-r from-amber-50 to-white rounded-lg p-5 border border-amber-200">
-                  <h4 className="font-semibold text-slate-900 mb-2">Électricité</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Tableaux électriques, installation de caméras et interphones, câblage complet,
-                    courants forts et courants faibles. Équipement électrique complet pour appartements et pavillons.
-                  </p>
-                </div>
-                <div className="bg-gradient-to-r from-amber-50 to-white rounded-lg p-5 border border-amber-200">
-                  <h4 className="font-semibold text-slate-900 mb-2">Installations intérieures</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Installation de salles de bains, cuisines, WC, pose de parquets, carrelages
-                    et tous autres travaux d'aménagement intérieur.
-                  </p>
-                </div>
-                <div className="bg-gradient-to-r from-amber-50 to-white rounded-lg p-5 border border-amber-200">
-                  <h4 className="font-semibold text-slate-900 mb-2">Lecture de plans</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Capacité à lire et interpréter les plans d'architectes pour une mise en œuvre précise.
-                  </p>
-                </div>
+                {company.skills.map((skill, index) => (
+                  <div key={index} className="bg-gradient-to-r from-amber-50 to-white rounded-lg p-5 border border-amber-200">
+                    <h4 className="font-semibold text-slate-900 mb-2">{skill.title}</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {skill.description}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -113,29 +134,23 @@ export default function About() {
                 <h3 className="text-2xl font-bold text-slate-900">Langues</h3>
               </div>
               <div className="grid grid-cols-3 gap-3">
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200 text-center">
-                  <p className="font-semibold text-slate-900">Moldave</p>
-                  <p className="text-xs text-slate-600">Langue maternelle</p>
-                </div>
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200 text-center">
-                  <p className="font-semibold text-slate-900">Russe</p>
-                  <p className="text-xs text-slate-600">Courant</p>
-                </div>
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200 text-center">
-                  <p className="font-semibold text-slate-900">Français</p>
-                  <p className="text-xs text-slate-600">Courant</p>
-                </div>
+                {company.languages.map((lang, index) => (
+                  <div key={index} className="bg-slate-50 rounded-lg p-4 border border-slate-200 text-center">
+                    <p className="font-semibold text-slate-900">{lang.name}</p>
+                    <p className="text-xs text-slate-600">{lang.level}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 text-white">
-              <h3 className="text-xl font-bold mb-3">Certification RGE</h3>
-              <p className="text-slate-300 leading-relaxed text-sm">
-                Certifié Reconnu Garant de l'Environnement (RGE) depuis 2024,
-                garantissant des travaux de qualité respectant les normes environnementales
-                et permettant à mes clients de bénéficier d'aides financières pour leurs projets.
-              </p>
-            </div>
+            {company.certifications.map((cert, index) => (
+              <div key={index} className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 text-white">
+                <h3 className="text-xl font-bold mb-3">Certification {cert.name}</h3>
+                <p className="text-slate-300 leading-relaxed text-sm">
+                  {cert.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
