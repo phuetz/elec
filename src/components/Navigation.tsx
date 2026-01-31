@@ -58,6 +58,12 @@ export default function Navigation() {
                 À propos
               </a>
               <a
+                href="#professionnels"
+                className="hover:text-amber-500 transition-colors duration-300 font-medium"
+              >
+                Pros
+              </a>
+              <a
                 href="#contact"
                 className="bg-amber-500 hover:bg-amber-600 text-slate-900 px-6 py-2 rounded-lg font-semibold transition-all duration-300"
               >
@@ -128,6 +134,13 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               À propos
+            </a>
+            <a
+              href="#professionnels"
+              className="block hover:text-amber-500 transition-colors duration-300 font-medium py-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Pros
             </a>
             <a
               href="#contact"

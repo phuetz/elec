@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carte Premium Recto - E.S.C BELITEI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #e2e8f0;
+    }
+    .card {
+      width: 85mm;
+      height: 55mm;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .accent-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4mm;
+      background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+    }
+    .content {
+      padding: 8mm 6mm 5mm 6mm;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 4mm;
+      margin-bottom: 3mm;
+    }
+    .logo {
+      width: 14mm;
+      height: 14mm;
+      border-radius: 3mm;
+      object-fit: cover;
+      border: 2px solid #f59e0b;
+    }
+    .company-info {
+      flex: 1;
+    }
+    .company-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+    .tagline {
+      font-size: 8px;
+      font-weight: 600;
+      color: #f59e0b;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 1mm;
+    }
+    .owner {
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 3mm;
+    }
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2mm;
+      margin-bottom: auto;
+    }
+    .service {
+      font-size: 7px;
+      font-weight: 600;
+      color: #1e293b;
+      background: #f59e0b;
+      padding: 1mm 2.5mm;
+      border-radius: 1mm;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 2mm;
+    }
+    .phone {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .certif {
+      background: rgba(255,255,255,0.1);
+      padding: 1.5mm 3mm;
+      border-radius: 2mm;
+      font-size: 8px;
+      font-weight: 700;
+      color: #f59e0b;
+      border: 1px solid #f59e0b;
+    }
+    .bg-circle {
+      position: absolute;
+      width: 60mm;
+      height: 60mm;
+      border-radius: 50%;
+      background: rgba(245, 158, 11, 0.05);
+      right: -20mm;
+      bottom: -20mm;
+    }
+    @media print {
+      body { background: white; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="accent-bar"></div>
+    <div class="bg-circle"></div>
+    <div class="content">
+      <div class="header">
+        <img src="public/images/logo.jpeg" alt="Logo" class="logo">
+        <div class="company-info">
+          <div class="company-name">E.S.C BELITEI</div>
+          <div class="tagline">Électricité & Rénovation</div>
+        </div>
+      </div>
+      <div class="owner">Gheorghii BELITEI</div>
+      <div class="services">
+        <span class="service">Électricité</span>
+        <span class="service">Rénovation TCE</span>
+        <span class="service">Salle de bain</span>
+        <span class="service">Cuisine</span>
+        <span class="service">VMC</span>
+      </div>
+      <div class="footer">
+        <div class="phone">07 61 61 54 00</div>
+        <div class="certif">RGE 2024</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

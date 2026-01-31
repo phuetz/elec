@@ -7,6 +7,7 @@ import Process from './components/Process';
 import Projects from './components/Projects';
 import Testimonials from './components/Testimonials';
 import About from './components/About';
+import Professionals from './components/Professionals';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import EmailTemplates from './components/EmailTemplates';
@@ -41,6 +42,7 @@ function App() {
       <Projects />
       <Testimonials />
       <About />
+      <Professionals />
       <Contact />
       <Footer />
     </div>

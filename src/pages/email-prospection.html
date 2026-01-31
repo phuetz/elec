@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates Email Prospection - E.S.C BELITEI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f1f5f9;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #1e293b;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+    .template {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .template-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f59e0b;
+    }
+    .template-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .template-target {
+      font-size: 12px;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .field {
+      margin-bottom: 15px;
+    }
+    .field-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    .field-value {
+      background: #f8fafc;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      font-size: 14px;
+      color: #1e293b;
+    }
+    .email-body {
+      white-space: pre-wrap;
+      line-height: 1.8;
+    }
+    .variable {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .copy-btn {
+      background: #f59e0b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .copy-btn:hover {
+      background: #d97706;
+    }
+    .tips {
+      background: #ecfdf5;
+      border: 1px solid #6ee7b7;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+    .tips h3 {
+      color: #065f46;
+      margin-bottom: 10px;
+    }
+    .tips ul {
+      color: #047857;
+      padding-left: 20px;
+    }
+    .tips li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Templates Email de Prospection</h1>
+    <p class="subtitle">Emails prêts à envoyer pour contacter syndics et architectes</p>
+
+    <!-- EMAIL 1 : SYNDICS -->
+    <div class="template">
+      <div class="template-header">
+        <span class="template-title">Email Syndic de Copropriété</span>
+        <span class="template-target">Syndics</span>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Objet</div>
+        <div class="field-value">
+          Artisan électricien RGE - Travaux de rénovation pour vos copropriétés
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Corps de l'email</div>
+        <div class="field-value email-body">Bonjour <span class="variable">[Nom du contact]</span>,
+
+Je me permets de vous contacter car je suis artisan électricien certifié RGE, spécialisé dans les travaux de rénovation en copropriété.
+
+<strong>Mes interventions courantes pour les syndics :</strong>
+• Mise aux normes des tableaux électriques (parties communes et privatives)
+• Installation et remplacement d'interphones/vidéophones
+• Éclairage des parties communes (LED, détecteurs de présence)
+• Installation de systèmes de vidéosurveillance
+• Rénovation de colonnes montantes
+• Travaux de ventilation (VMC)
+
+<strong>Pourquoi travailler avec E.S.C BELITEI ?</strong>
+• 25 ans d'expérience dans le bâtiment
+• Certification RGE (aides financières pour vos copropriétaires)
+• Devis détaillés et transparents
+• Respect strict des délais
+• Interlocuteur unique pour tous les corps de métier
+• Intervention rapide en Île-de-France et Oise
+
+Je serais ravi de vous rencontrer pour vous présenter mes références et discuter de vos besoins.
+
+Vous trouverez en pièce jointe ma plaquette de présentation avec des exemples de réalisations.
+
+Je reste à votre disposition pour tout renseignement complémentaire.
+
+Bien cordialement,
+
+<strong>Gheorghii BELITEI</strong>
+E.S.C BELITEI - Électricité & Rénovation
+📞 07 61 61 54 00
+📧 delitei.georghii@orange.fr
+🌐 esc-belitei.vercel.app
+SIRET : 884 810 847 00019</div>
+      </div>
+      <button class="copy-btn" onclick="copyEmail(this)">Copier l'email</button>
+    </div>
+
+    <!-- EMAIL 2 : ARCHITECTES -->
+    <div class="template">
+      <div class="template-header">
+        <span class="template-title">Email Architecte / Maître d'oeuvre</span>
+        <span class="template-target">Architectes</span>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Objet</div>
+        <div class="field-value">
+          Partenariat artisan TCE - Électricité et rénovation complète
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Corps de l'email</div>
+        <div class="field-value email-body">Bonjour <span class="variable">[Nom de l'architecte]</span>,
+
+Je suis Gheorghii Belitei, artisan électricien et spécialiste en rénovation tous corps d'état depuis 25 ans.
+
+Je recherche des partenariats avec des architectes et maîtres d'œuvre pour collaborer sur leurs projets de rénovation.
+
+<strong>Mon expertise :</strong>
+• Électricité complète (courants forts/faibles, domotique)
+• Rénovation de salles de bain et cuisines
+• Pose de revêtements (parquet, carrelage)
+• Installation VMC et ventilation
+• Lecture et interprétation des plans d'architecte
+
+<strong>Ce que j'apporte à vos projets :</strong>
+• Polyvalence : un seul interlocuteur pour plusieurs lots
+• Réactivité : disponibilité et respect des plannings chantier
+• Qualité : finitions soignées, conforme aux DTU
+• Certification RGE pour les projets de rénovation énergétique
+• Assurance décennale
+
+J'ai l'habitude de travailler en coordination avec les autres corps de métier et de m'adapter aux exigences de chaque projet.
+
+Seriez-vous disponible pour un échange téléphonique ou une rencontre afin que je vous présente mon travail ?
+
+En pièce jointe, vous trouverez ma plaquette avec des photos de réalisations récentes.
+
+Dans l'attente de votre retour, je vous prie d'agréer mes salutations distinguées.
+
+<strong>Gheorghii BELITEI</strong>
+E.S.C BELITEI - Électricité & Rénovation TCE
+📞 07 61 61 54 00
+📧 delitei.georghii@orange.fr
+🌐 esc-belitei.vercel.app</div>
+      </div>
+      <button class="copy-btn" onclick="copyEmail(this)">Copier l'email</button>
+    </div>
+
+    <!-- EMAIL 3 : RELANCE -->
+    <div class="template">
+      <div class="template-header">
+        <span class="template-title">Email de Relance</span>
+        <span class="template-target">Tous</span>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Objet</div>
+        <div class="field-value">
+          Suite à mon email - E.S.C BELITEI, artisan électricien RGE
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Corps de l'email</div>
+        <div class="field-value email-body">Bonjour <span class="variable">[Nom du contact]</span>,
+
+Je me permets de revenir vers vous suite à mon précédent email concernant mes services d'électricité et rénovation.
+
+Je comprends que vous êtes très sollicité(e), mais je souhaitais simplement vous rappeler ma disponibilité pour :
+• Établir des devis gratuits et détaillés
+• Intervenir rapidement sur vos chantiers en cours
+• Vous présenter mes références et réalisations
+
+Un simple appel de 10 minutes me permettrait de mieux comprendre vos besoins et de voir comment je pourrais vous être utile.
+
+Seriez-vous disponible cette semaine ou la semaine prochaine ?
+
+Bien cordialement,
+
+<strong>Gheorghii BELITEI</strong>
+📞 07 61 61 54 00</div>
+      </div>
+      <button class="copy-btn" onclick="copyEmail(this)">Copier l'email</button>
+    </div>
+
+    <!-- CONSEILS -->
+    <div class="tips">
+      <h3>Conseils pour maximiser vos chances de réponse</h3>
+      <ul>
+        <li><strong>Personnalisez</strong> : Remplacez les variables entre crochets par le vrai nom du contact</li>
+        <li><strong>Joignez la plaquette PDF</strong> : Nommez-la "Plaquette-ESC-BELITEI.pdf"</li>
+        <li><strong>Envoyez le mardi ou mercredi matin</strong> : Meilleurs taux d'ouverture</li>
+        <li><strong>Relancez après 5-7 jours</strong> si pas de réponse</li>
+        <li><strong>Mentionnez un projet local</strong> si possible (ex: "J'ai récemment travaillé dans votre quartier...")</li>
+        <li><strong>LinkedIn</strong> : Connectez-vous avec le contact avant ou après l'email</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function copyEmail(btn) {
+      const template = btn.closest('.template');
+      const emailBody = template.querySelector('.email-body').innerText;
+      navigator.clipboard.writeText(emailBody).then(() => {
+        btn.textContent = 'Copié !';
+        btn.style.background = '#10b981';
+        setTimeout(() => {
+          btn.textContent = 'Copier l\'email';
+          btn.style.background = '#f59e0b';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
