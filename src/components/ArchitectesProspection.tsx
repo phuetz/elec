@@ -50,21 +50,13 @@ Gheorghii DELITEI
 E.S.C BELITEI
 07 61 61 54 00`;
 
-const departements = [
-  { code: '75', nom: 'Paris' },
-  { code: '77', nom: 'Seine-et-Marne' },
-  { code: '78', nom: 'Yvelines' },
-  { code: '91', nom: 'Essonne' },
-  { code: '92', nom: 'Hauts-de-Seine' },
-  { code: '93', nom: 'Seine-Saint-Denis' },
-  { code: '94', nom: 'Val-de-Marne' },
-  { code: '95', nom: "Val-d'Oise" },
-];
 
 export default function ArchitectesProspection() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [selectedDept, setSelectedDept] = useState('93');
+  const [searchNom, setSearchNom] = useState('');
+  const [searchCp, setSearchCp] = useState('');
   const [searchVille, setSearchVille] = useState('');
+  const [searchRegion, setSearchRegion] = useState('110');
 
   useEffect(() => {
     const meta = document.createElement('meta');
@@ -79,14 +71,6 @@ export default function ArchitectesProspection() {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
-  };
-
-  const getAnnuaireUrl = () => {
-    const base = 'https://annuaire.architectes.org/architectes';
-    if (searchVille) {
-      return `${base}?location=${encodeURIComponent(searchVille)}&radius=20`;
-    }
-    return `${base}?department=${selectedDept}`;
   };
 
   const getMailtoLink = (email?: string) => {
@@ -127,43 +111,89 @@ export default function ArchitectesProspection() {
             Rechercher des architectes sur l'annuaire officiel
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Par département</label>
-              <select
-                value={selectedDept}
-                onChange={(e) => setSelectedDept(e.target.value)}
-                className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-              >
-                {departements.map(d => (
-                  <option key={d.code} value={d.code}>{d.code} - {d.nom}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Ou par ville</label>
-              <div className="flex gap-2">
+          <form
+            method="POST"
+            action="https://annuaire.architectes.org/"
+            target="_blank"
+            className="space-y-4"
+          >
+            <input type="hidden" name="type" value="habilite" />
+            <input type="hidden" name="posted" value="1" />
+            <input type="hidden" name="me" value="0" />
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Nom / Cabinet</label>
                 <input
                   type="text"
-                  value={searchVille}
-                  onChange={(e) => setSearchVille(e.target.value)}
-                  placeholder="Ex: Épinay-sur-Seine, Saint-Denis..."
-                  className="flex-1 border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  name="nom"
+                  value={searchNom}
+                  onChange={(e) => setSearchNom(e.target.value)}
+                  placeholder="Ex: Dupont, Atelier XYZ..."
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Code postal</label>
+                <input
+                  type="text"
+                  name="cp"
+                  value={searchCp}
+                  onChange={(e) => setSearchCp(e.target.value)}
+                  maxLength={5}
+                  placeholder="Ex: 93800, 75011..."
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 />
               </div>
             </div>
-          </div>
 
-          <a
-            href={getAnnuaireUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-lg transition"
-          >
-            <Search className="w-5 h-5" />
-            Rechercher sur annuaire.architectes.org
-            <ExternalLink className="w-4 h-4" />
-          </a>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Ville</label>
+                <input
+                  type="text"
+                  name="ville"
+                  value={searchVille}
+                  onChange={(e) => setSearchVille(e.target.value)}
+                  placeholder="Ex: Épinay-sur-Seine, Saint-Denis..."
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Région</label>
+                <select
+                  name="code_region"
+                  value={searchRegion}
+                  onChange={(e) => setSearchRegion(e.target.value)}
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                >
+                  <option value="">Toutes les régions</option>
+                  <option value="101">Auvergne-Rhône-Alpes</option>
+                  <option value="102">Bourgogne-Franche-Comté</option>
+                  <option value="103">Bretagne</option>
+                  <option value="104">Centre-Val de Loire</option>
+                  <option value="105">Corse</option>
+                  <option value="106">Grand Est</option>
+                  <option value="109">Hauts-de-France</option>
+                  <option value="110">Île-de-France</option>
+                  <option value="112">Normandie</option>
+                  <option value="113">Nouvelle-Aquitaine</option>
+                  <option value="114">Occitanie</option>
+                  <option value="115">Pays-de-la-Loire</option>
+                  <option value="116">Provence-Alpes-Côte d'Azur</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-lg transition"
+            >
+              <Search className="w-5 h-5" />
+              Rechercher sur annuaire.architectes.org
+              <ExternalLink className="w-4 h-4" />
+            </button>
+          </form>
 
           <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
             <strong>Conseil :</strong> Sur l'annuaire, cliquez sur le profil de chaque architecte pour trouver son email.
