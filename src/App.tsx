@@ -11,13 +11,16 @@ import Professionals from './components/Professionals';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import EmailTemplates from './components/EmailTemplates';
+import ArchitectesProspection from './components/ArchitectesProspection';
 
 function App() {
   const [showEmails, setShowEmails] = useState(false);
+  const [showArchitectes, setShowArchitectes] = useState(false);
 
   useEffect(() => {
     const checkHash = () => {
       setShowEmails(window.location.hash === '#emails');
+      setShowArchitectes(window.location.hash === '#architectes');
     };
 
     checkHash();
@@ -25,9 +28,12 @@ function App() {
     return () => window.removeEventListener('hashchange', checkHash);
   }, []);
 
-  // Page cachée des templates d'emails
+  // Pages cachées
   if (showEmails) {
     return <EmailTemplates />;
+  }
+  if (showArchitectes) {
+    return <ArchitectesProspection />;
   }
 
   return (
