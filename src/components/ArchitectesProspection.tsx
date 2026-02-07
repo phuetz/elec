@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Copy, Check, ExternalLink, ArrowLeft, Search, Mail, Download, Building2 } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Copy, Check, ExternalLink, ArrowLeft, Search, Mail, Download, Building2, Loader2 } from 'lucide-react';
 
 const emailSubject = "Partenariat artisan TCE - Électricité et rénovation complète";
 
@@ -57,6 +57,9 @@ export default function ArchitectesProspection() {
   const [searchCp, setSearchCp] = useState('');
   const [searchVille, setSearchVille] = useState('');
   const [searchRegion, setSearchRegion] = useState('110');
+  const [showIframe, setShowIframe] = useState(false);
+  const [iframeLoading, setIframeLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const meta = document.createElement('meta');
@@ -112,10 +115,12 @@ export default function ArchitectesProspection() {
           </h2>
 
           <form
+            ref={formRef}
             method="POST"
             action="https://annuaire.architectes.org/"
-            target="_blank"
+            target="annuaire-results"
             className="space-y-4"
+            onSubmit={() => { setShowIframe(true); setIframeLoading(true); }}
           >
             <input type="hidden" name="type" value="habilite" />
             <input type="hidden" name="posted" value="1" />
@@ -185,19 +190,61 @@ export default function ArchitectesProspection() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-lg transition"
-            >
-              <Search className="w-5 h-5" />
-              Rechercher sur annuaire.architectes.org
-              <ExternalLink className="w-4 h-4" />
-            </button>
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-lg transition"
+              >
+                <Search className="w-5 h-5" />
+                Rechercher
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (formRef.current) {
+                    formRef.current.target = '_blank';
+                    formRef.current.submit();
+                    formRef.current.target = 'annuaire-results';
+                  }
+                }}
+                className="inline-flex items-center gap-2 border-2 border-slate-300 hover:border-slate-400 text-slate-700 font-semibold px-6 py-3 rounded-lg transition"
+              >
+                <ExternalLink className="w-5 h-5" />
+                Ouvrir dans un nouvel onglet
+              </button>
+            </div>
           </form>
 
+          {/* Résultats dans un iframe */}
+          {showIframe && (
+            <div className="mt-6">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-slate-900 flex items-center gap-2">
+                  Résultats de l'annuaire
+                  {iframeLoading && <Loader2 className="w-4 h-4 animate-spin text-amber-500" />}
+                </h3>
+                <button
+                  onClick={() => setShowIframe(false)}
+                  className="text-sm text-slate-500 hover:text-slate-700"
+                >
+                  Fermer
+                </button>
+              </div>
+              <p className="text-xs text-slate-500 mb-2">
+                Cliquez sur un nom pour voir ses coordonnées (adresse, téléphone). Pour le contacter, utilisez le formulaire de contact de l'annuaire ou copiez les infos.
+              </p>
+              <iframe
+                name="annuaire-results"
+                className="w-full border-2 border-slate-200 rounded-lg"
+                style={{ height: '600px' }}
+                onLoad={() => setIframeLoading(false)}
+              />
+            </div>
+          )}
+
           <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
-            <strong>Conseil :</strong> Sur l'annuaire, cliquez sur le profil de chaque architecte pour trouver son email.
-            Concentrez-vous sur les cabinets qui font de la rénovation résidentielle et des projets de taille moyenne.
+            <strong>Conseil :</strong> Cliquez sur chaque architecte dans les résultats pour voir son adresse et téléphone.
+            Pour obtenir l'email, utilisez le formulaire de contact intégré ou cherchez le cabinet sur Google.
           </div>
         </section>
 
