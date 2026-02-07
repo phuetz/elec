@@ -12,15 +12,18 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import EmailTemplates from './components/EmailTemplates';
 import ArchitectesProspection from './components/ArchitectesProspection';
+import AnnuaireArchitectes from './components/AnnuaireArchitectes';
 
 function App() {
   const [showEmails, setShowEmails] = useState(false);
   const [showArchitectes, setShowArchitectes] = useState(false);
+  const [showAnnuaire, setShowAnnuaire] = useState(false);
 
   useEffect(() => {
     const checkHash = () => {
       setShowEmails(window.location.hash === '#emails');
       setShowArchitectes(window.location.hash === '#architectes');
+      setShowAnnuaire(window.location.hash === '#annuaire');
     };
 
     checkHash();
@@ -34,6 +37,9 @@ function App() {
   }
   if (showArchitectes) {
     return <ArchitectesProspection />;
+  }
+  if (showAnnuaire) {
+    return <AnnuaireArchitectes />;
   }
 
   return (
