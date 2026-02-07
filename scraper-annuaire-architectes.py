@@ -235,13 +235,20 @@ class AnnuaireArchitectesScraper:
             return {}
 
     def search_by_department(self, dept, region='110'):
-        """Recherche par département (utilise les CP principaux)."""
+        """Recherche par département en itérant sur chaque CP connu."""
         cps = CP_IDF.get(dept)
         if cps:
-            # Utiliser juste le préfixe du département
-            self.search(cp=dept, region=region)
+            print(f"\nDépartement {dept}: {len(cps)} codes postaux à parcourir")
+            for cp in cps:
+                self.search(cp=cp, region=region)
+                time.sleep(DELAY)
         else:
-            self.search(cp=dept, region=region)
+            # Département inconnu, essayer les CP de 000 à 999
+            print(f"\nDépartement {dept}: scan des codes postaux {dept}000-{dept}999")
+            for i in range(0, 1000, 10):
+                cp = f"{dept}{i:03d}"
+                self.search(cp=cp, region=region)
+                time.sleep(DELAY)
 
     def search_all_idf(self):
         """Recherche tous les architectes d'Île-de-France par département."""
@@ -250,8 +257,7 @@ class AnnuaireArchitectesScraper:
         print("=" * 60)
 
         for dept in ['75', '77', '78', '91', '92', '93', '94', '95']:
-            print(f"\nDépartement {dept}:")
-            self.search(cp=dept, region='110')
+            self.search_by_department(dept, region='110')
             time.sleep(2)
 
     def export_csv(self, filename='architectes-annuaire.csv'):
@@ -358,7 +364,7 @@ def main():
     if args.all_idf:
         scraper.search_all_idf()
     elif args.dept:
-        scraper.search(cp=args.dept, region=args.region)
+        scraper.search_by_department(args.dept, region=args.region)
     else:
         scraper.search(cp=args.cp, ville=args.ville, region=args.region, nom=args.nom)
 
